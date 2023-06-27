@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch 2 Lecture76 JS Students Crud Operation Using Html Form and a Table</title>
+
+    <style>
+
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <form>
+        <input type="text" name="fname" placeholder="FIRST NAME">
+        <input type="text" name="lname" placeholder="LAST NAME">
+        <input type="text" name="address" placeholder="ADDRESS">
+        <button type="button" onclick="save()">Submit</button>
+
+    </form>
+    <hr>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Anil
+                </td>
+                <td>
+                    Dollor
+                </td>
+                <td>
+                    Neemuch
+                </td>
+                <td>
+                    <button>View</button>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+
+    <script>
+
+
+        
+                    let fn = document.querySelector('input[name="fname"]');
+                    let ln = document.querySelector('input[name="lname"]');
+                    let add = document.querySelector('input[name="address"]');
+
+
+        let save = () => {
+
+            let tr = document.querySelector('table tbody ');
+
+            console.log(fn.value);
+            console.log(ln.value);
+            console.log(add.value);
+
+           // console.log(tr);
+
+            tr.innerHTML += `<tr><td>${fn.value}</td> 
+                                 <td>${ln.value}</td> 
+                                 <td>${add.value}</td> 
+                             <td>
+                                <button>View</button>
+                                <button>Edit</button>
+                                <button onclick="deleteElm(this)">Delete</button>
+                    
+                             </td>
+                          </tr>`
+
+                 fn.value =  ln.value = add.value ='';         
+                        
+        }
+
+        deleteElm=(e)=>{
+           // alert('okkk')
+            console.log(e.closest('tr'));
+            e.closest('tr').remove();
+        }
+
+    </script>
+
+</body>
+
+</html>
