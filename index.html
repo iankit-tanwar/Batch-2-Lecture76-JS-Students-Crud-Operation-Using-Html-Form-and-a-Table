@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Batch 2 Lecture76 JS Students Crud Operation Using Html Form and a Table</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <style>
 
@@ -15,6 +17,32 @@
 </head>
 
 <body>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">STUDENT INFORMATION</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li></li>
+                        <li>B</li>
+                        <li>C</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <form>
         <input type="text" name="fname" placeholder="FIRST NAME">
         <input type="text" name="lname" placeholder="LAST NAME">
@@ -24,7 +52,7 @@
     </form>
     <hr>
 
-    <table border="1">
+    <table border="1" class="table w-50 offset-3">
         <thead>
             <tr>
                 <th>Name</th>
@@ -36,34 +64,21 @@
         </thead>
         <tbody>
             <tr>
-                <td>
-                    Anil
-                </td>
-                <td>
-                    Dollor
-                </td>
-                <td>
-                    Neemuch
-                </td>
-                <td>
-                    <button>View</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </td>
+
             </tr>
 
         </tbody>
     </table>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 
     <script>
 
-
-        
-                    let fn = document.querySelector('input[name="fname"]');
-                    let ln = document.querySelector('input[name="lname"]');
-                    let add = document.querySelector('input[name="address"]');
+        let fn = document.querySelector('input[name="fname"]');
+        let ln = document.querySelector('input[name="lname"]');
+        let add = document.querySelector('input[name="address"]');
 
 
         let save = () => {
@@ -74,27 +89,56 @@
             console.log(ln.value);
             console.log(add.value);
 
-           // console.log(tr);
+            // console.log(tr);
 
             tr.innerHTML += `<tr><td>${fn.value}</td> 
                                  <td>${ln.value}</td> 
                                  <td>${add.value}</td> 
                              <td>
-                                <button>View</button>
-                                <button>Edit</button>
-                                <button onclick="deleteElm(this)">Delete</button>
+                                <button class="btn btn-sm text-white bg-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="view(this)">View</button>
+                                <button class="btn btn-sm text-white bg-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="edit(this)">Edit</button>
+                                <button class="btn btn-sm text-white bg-danger" onclick="deleteElm(this)">Delete</button>
                     
                              </td>
                           </tr>`
 
-                 fn.value =  ln.value = add.value ='';         
-                        
+            fn.value = ln.value = add.value = '';
+
         }
 
-        deleteElm=(e)=>{
-           // alert('okkk')
+        deleteElm = (e) => {
+            // alert('okkk')
             console.log(e.closest('tr'));
             e.closest('tr').remove();
+        }
+
+
+        let view = (elm) => {
+
+            let name = elm.closest('tr').querySelector('td:first-child').innerHTML;
+            let surname = elm.closest('tr').querySelector('td:nth-child(2)').innerHTML;
+            let adrs = elm.closest('tr').querySelector('td:nth-child(3)').innerHTML;
+
+
+            document.querySelector('.modal-body ul li:first-child').innerHTML = name;
+            document.querySelector('.modal-body ul li:nth-child(2)').innerHTML = surname;
+            document.querySelector('.modal-body ul li:last-child').innerHTML = adrs;
+
+
+        }
+
+
+        edit = (elem) => {
+
+            document.querySelector('.modal-body').innerHTML = ` <form>
+                                                                         <input type="text" name="fname" placeholder="FIRST NAME">
+                                                                         <input type="text" name="lname" placeholder="LAST NAME">
+                                                                         <input type="text" name="address" placeholder="ADDRESS">
+                                                                         <button type="button" onclick="update()">Update</button>
+
+                                                                </form>`;
+
+
         }
 
     </script>
